@@ -1,0 +1,15 @@
+# Render Deployment Configuration
+
+services:
+  - type: web
+    name: lateral-thinking-mcp-server
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: TRANSPORT=http npm start
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: NODE_ENV
+        value: production

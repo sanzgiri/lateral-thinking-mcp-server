@@ -1,0 +1,10 @@
+node_modules
+dist
+npm-debug.log
+.git
+.gitignore
+README.md
+QUICKSTART.md
+USAGE_GUIDE.md
+evaluation.xml
+*.md

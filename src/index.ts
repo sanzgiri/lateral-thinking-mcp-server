@@ -80,7 +80,7 @@ Error Handling:
   },
   async (params) => {
     const puzzle = PUZZLES.find(p => p.id === params.puzzle_id);
-    
+
     if (!puzzle) {
       return {
         content: [{
@@ -91,11 +91,11 @@ Error Handling:
     }
 
     const formatted = formatPuzzle(puzzle, params.include_answer, params.response_format);
-    
+
     return {
       content: [{ type: "text", text: formatted }],
-      structuredContent: params.response_format === ResponseFormat.JSON ? 
-        (params.include_answer ? puzzle : { ...puzzle, answer: "[Hidden]", explanation: "[Hidden]" }) : 
+      structuredContent: params.response_format === ResponseFormat.JSON ?
+        (params.include_answer ? puzzle : { ...puzzle, answer: "[Hidden]", explanation: "[Hidden]" }) :
         undefined
     };
   }
@@ -175,8 +175,8 @@ Note: Answers are never included in list results. Use lateral_get_puzzle to see 
 
     return {
       content: [{ type: "text", text: formatted }],
-      structuredContent: params.response_format === ResponseFormat.JSON ? 
-        { puzzles: filtered, count: filtered.length } : 
+      structuredContent: params.response_format === ResponseFormat.JSON ?
+        { puzzles: filtered, count: filtered.length } :
         undefined
     };
   }
@@ -241,8 +241,8 @@ Examples:
 
     return {
       content: [{ type: "text", text: formatted }],
-      structuredContent: params.response_format === ResponseFormat.JSON ? 
-        (params.include_answer ? puzzle : { ...puzzle, answer: "[Hidden]", explanation: "[Hidden]" }) : 
+      structuredContent: params.response_format === ResponseFormat.JSON ?
+        (params.include_answer ? puzzle : { ...puzzle, answer: "[Hidden]", explanation: "[Hidden]" }) :
         undefined
     };
   }
@@ -364,8 +364,8 @@ Examples:
 
     return {
       content: [{ type: "text", text: formatted }],
-      structuredContent: params.response_format === ResponseFormat.JSON ? 
-        { techniques: TECHNIQUES, count: TECHNIQUES.length } : 
+      structuredContent: params.response_format === ResponseFormat.JSON ?
+        { techniques: TECHNIQUES, count: TECHNIQUES.length } :
         undefined
     };
   }
@@ -525,7 +525,7 @@ async function runHTTP(): Promise<void> {
 }
 
 // Choose transport based on environment
-const transport = process.env.TRANSPORT || 'stdio';
+const transport = process.env.TRANSPORT || (process.env.PORT ? 'http' : 'stdio');
 if (transport === 'http') {
   runHTTP().catch(error => {
     console.error("Server error:", error);
